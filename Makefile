@@ -1,4 +1,4 @@
-CFLAGS = -I src -O3 -lm
+CFLAGS = -I src -O3 -lm -Wno-unused-result
 
 all:
 	gcc src/*.c -o build/main $(CFLAGS)
