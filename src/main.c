@@ -11,9 +11,15 @@
 int main() {
 
   size_t ctrl_size;
-  void* ctrl_buf = init_ctrl_buffer(&ctrl_size);
+  volatile int* ctrl_buf = init_ctrl_buffer(&ctrl_size);
 
   printf("buf: %p size: %lx\n", ctrl_buf, ctrl_size);
+
+  printf("%d %d %d\n", ctrl_buf[0], ctrl_buf[1], ctrl_buf[2]);
+  ctrl_buf[0] = 11;
+  ctrl_buf[1] = 53;
+  ctrl_buf[2] = 9;
+  printf("%d %d %d\n", ctrl_buf[0], ctrl_buf[1], ctrl_buf[2]);
 
   deinit_ctrl_buffer();
 

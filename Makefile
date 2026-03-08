@@ -8,5 +8,9 @@ all:
 insmod:
 	sudo insmod udmabuf/u-dma-buf.ko udmabuf0=1048576
 
+# Reprogram the fpga with the default bitstream
+reset_fpga:
+	sudo fpgautil -b /lib/firmware/xilinx/k26-starter-kits/k26_starter_kits.bit.bin
+
 clean:
 	rm -f main
