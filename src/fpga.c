@@ -9,7 +9,7 @@
 #include "fpga.h"
 
 // Control buffer size is 64K
-#define CTRL_SIZE 0x10000
+#define CTRL_SIZE 0x1000
 #define CTRL_PHYS 0x80000000
 
 static int ctrl_fd = 0;
@@ -20,7 +20,7 @@ void* init_ctrl_buffer(size_t *size) {
   if ((ctrl_fd = open("/dev/mem", O_RDWR)) < 0) return NULL;
 
   if (size) *size = CTRL_SIZE;
-  return mmap(NULL, CTRL_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, ctrl_fd, CTRL_PHYS);
+  return mmap(NULL, sysconf(_SC_PAGESIZE), PROT_READ|PROT_WRITE, MAP_SHARED, ctrl_fd, CTRL_PHYS);
 }
 
 void deinit_ctrl_buffer() {
